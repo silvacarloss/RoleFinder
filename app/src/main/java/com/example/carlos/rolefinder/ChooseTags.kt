@@ -4,17 +4,18 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import com.example.carlos.rolefinder.controllers.EventsController
 import com.example.carlos.rolefinder.controllers.UserController
 import com.example.carlos.rolefinder.models.Event
 import com.example.carlos.rolefinder.models.User
+import android.widget.CompoundButton
+import com.example.carlos.rolefinder.models.Tags
+
 
 class ChooseTags : AppCompatActivity() {
     lateinit var llChecks : LinearLayout
+    var objectTags = ArrayList<Tags>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,11 @@ class ChooseTags : AppCompatActivity() {
         for (tag in listTags!!){
             val check = CheckBox(applicationContext)
             check.text = tag.name
+            check.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                    if(isChecked) objectTags.add(tag)
+                    else objectTags.remove(tag)
+                }
+            )
             llChecks.addView(check)
         }
         val btnNext = Button(applicationContext)
@@ -41,6 +47,9 @@ class ChooseTags : AppCompatActivity() {
     }
 
     private fun showHomeView() {
+        for(tag in objectTags){
+            println(tag._id)
+        }
         if(getIntent().getExtras().getBoolean("is_user")){
             saveUser()
         }else{
