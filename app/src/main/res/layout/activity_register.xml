@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Register">
+
+    <TextView
+        android:id="@+id/lblName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine|textPersonName" />
+
+    <TextView
+        android:id="@+id/lblEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="E-mail" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/groupRadio"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioReceive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want to receive new events"
+            android:onClick="selectUserType"/>
+
+        <RadioButton
+            android:id="@+id/radioAddEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectUserType"
+            android:text="I want to add my events here" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+</LinearLayout>
