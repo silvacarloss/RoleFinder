@@ -97,14 +97,15 @@ class UserORM {
         database = helper.readableDatabase
         val query = "SELECT * FROM ${Constants.Users.USERS_TABLE_NAME} WHERE ${Constants.Users.COLUMN_EMAIL} = ?"
         val cursor = database.rawQuery(query, arrayOf(email))
-        var user : User? = null
+        val user = User(null, null, null, null, null)
         if (cursor.moveToFirst()){
-            user!!._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
+            user._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
             user.email = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_EMAIL))
             user.name = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_NAME))
             user.password = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_PASSWORD))
             user.userKind = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_USER_KIND)).toInt()
         }
-        return user
+        if(user.name != null) return user
+        else return null
     }
 }

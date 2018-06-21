@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/lblPassword"
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/txtError"

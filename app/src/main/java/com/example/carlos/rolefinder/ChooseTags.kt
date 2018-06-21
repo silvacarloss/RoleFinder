@@ -72,8 +72,8 @@ class ChooseTags : AppCompatActivity() {
         val user = User(
             0,
             getIntent().getExtras().getString("user_email"),
-            getIntent().getExtras().getString("user_password"),
             getIntent().getExtras().getString("user_name"),
+            getIntent().getExtras().getString("user_password"),
             getIntent().getExtras().getInt("user_type")
         )
 

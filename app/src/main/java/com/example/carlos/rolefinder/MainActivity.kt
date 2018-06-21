@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.carlos.rolefinder.controllers.UserController
 import com.example.carlos.rolefinder.models.User
 
@@ -48,10 +49,27 @@ class MainActivity : AppCompatActivity() {
 
         if(isSubmitable){
             user = userController.tryLogin(this, txtEmail.text.toString())
-            if (user == null){
-
+            if (user != null){
+                if(txtPassword.text.toString().equals(user.password)){
+                    showNextView(user)
+                }
             }else{
-                //todo call new activity according to user options
+                Toast.makeText(this, "Wasn't found registers", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showNextView(user : User) {
+        when(user.userKind){
+            1 -> {
+                val showUserHomeView = Intent(this, UserHomeView::class.java)
+                startActivity(showUserHomeView)
+            }
+            2 -> {
+                val showCustomerHomeView = Intent(this, CustomerHomeView::class.java)
+                startActivity(showCustomerHomeView)
             }
         }
     }
