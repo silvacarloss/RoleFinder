@@ -23,7 +23,7 @@ class EventORM {
 
     lateinit var database : SQLiteDatabase
 
-    fun insert(helper : SQLiteOpenHelper, event : Event) : Boolean {
+    fun insert(helper : SQLiteOpenHelper, event : Event) : Long {
         database = helper.writableDatabase
         val valuesToInsert = ContentValues()
         valuesToInsert.put(Constants.Events.COLUMN_TITLE, event.title)
@@ -31,14 +31,15 @@ class EventORM {
         valuesToInsert.put(Constants.Events.COLUMN_ADDRESS, event.address)
         valuesToInsert.put(Constants.Events.COLUMN_DATA, event.date)
         valuesToInsert.put(Constants.Events.COLUMN_PRICE, event.price)
+        valuesToInsert.put(Constants.Events.COLUMN_ID_USER_CREATOR, event.idUserCreator)
+        var id : Long = -1
         try{
-            database.insert(Constants.Events.EVENTS_TABLE_NAME, null, valuesToInsert)
+            id = database.insert(Constants.Events.EVENTS_TABLE_NAME, null, valuesToInsert)
             database.close()
-            return true
         }catch (ex : Exception){
             database.close()
-            return false
         }
+        return id
     }
 
     fun update(helper : SQLiteOpenHelper, event : Event){
@@ -49,6 +50,7 @@ class EventORM {
         valuesToInsert.put(Constants.Events.COLUMN_ADDRESS, event.address)
         valuesToInsert.put(Constants.Events.COLUMN_DATA, event.date)
         valuesToInsert.put(Constants.Events.COLUMN_PRICE, event.price)
+        valuesToInsert.put(Constants.Events.COLUMN_ID_USER_CREATOR, event.idUserCreator)
         database.update(Constants.Events.EVENTS_TABLE_NAME,
                 valuesToInsert, "_id=?",
                 arrayOf(event._id.toString()))
@@ -64,7 +66,8 @@ class EventORM {
                         Constants.Events.COLUMN_DESCRIPTION,
                         Constants.Events.COLUMN_ADDRESS,
                         Constants.Events.COLUMN_DATA,
-                        Constants.Events.COLUMN_PRICE),
+                        Constants.Events.COLUMN_PRICE,
+                        Constants.Events.COLUMN_ID_USER_CREATOR),
                 null,
                 null,
                 null,
@@ -78,6 +81,7 @@ class EventORM {
                 event.address = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_ADDRESS))
                 event.date = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DATA))
                 event.price = cursor.getFloat(cursor.getColumnIndex(Constants.Events.COLUMN_PRICE))
+                event.idUserCreator = cursor.getInt(cursor.getColumnIndex(Constants.Events.COLUMN_ID_USER_CREATOR))
                 listEvents!!.add(event)
             }while(cursor.moveToNext())
         }

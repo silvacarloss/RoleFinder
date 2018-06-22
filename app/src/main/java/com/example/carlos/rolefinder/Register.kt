@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.provider.SyncStateContract
 import android.view.View
 import android.widget.*
+import com.example.carlos.rolefinder.controllers.UserController
+import com.example.carlos.rolefinder.models.User
 import com.example.carlos.rolefinder.utils.Constants
 
 
@@ -32,33 +34,37 @@ class Register : AppCompatActivity() {
     private fun addListener() {
         val btnSave = findViewById<Button>(R.id.btnSave)
         btnSave.setOnClickListener(View.OnClickListener {
-            val canSubmit : Boolean
-            canSubmit = !txtEmail.text.isNullOrBlank()
-                    && !txtName.text.isNullOrBlank()
-                    && !txtPassword.text.isNullOrBlank()
-                    && userType != 0
-            val validEmail = Constants.ApplicationUtils.validateEmail(txtEmail.text.toString())
-
-            if(canSubmit && validEmail){
-                if(userType == 1){
-                    val chooseTags = Intent(this, ChooseTags::class.java)
-                    val paramsToSend = Bundle()
-                    paramsToSend.putBoolean("is_user", true)
-                    paramsToSend.putString("user_email", txtEmail.text.toString())
-                    paramsToSend.putString("user_password", txtPassword.text.toString())
-                    paramsToSend.putString("user_name", txtName.text.toString())
-                    paramsToSend.putInt("user_type", userType)
-                    chooseTags.putExtras(paramsToSend)
-                    startActivity(chooseTags)
-                }else if(userType == 2){
-                    showHomeView()
-                }
-            }else{
-                println(txtEmail.text.toString())
-                if(!validEmail) Toast.makeText(this, "Please type a valid email", Toast.LENGTH_LONG).show()
-                else Toast.makeText(this, "All items are required", Toast.LENGTH_LONG).show()
-            }
+            saveUser()
         })
+    }
+
+    private fun saveUser() {
+        val canSubmit : Boolean
+        canSubmit = !txtEmail.text.isNullOrBlank()
+                && !txtName.text.isNullOrBlank()
+                && !txtPassword.text.isNullOrBlank()
+                && userType != 0
+        val validEmail = Constants.ApplicationUtils.validateEmail(txtEmail.text.toString())
+
+        if(canSubmit && validEmail){
+            if(userType == 1){
+                val chooseTags = Intent(this, ChooseTags::class.java)
+                val paramsToSend = Bundle()
+                paramsToSend.putBoolean("is_user", true)
+                paramsToSend.putString("user_email", txtEmail.text.toString())
+                paramsToSend.putString("user_password", txtPassword.text.toString())
+                paramsToSend.putString("user_name", txtName.text.toString())
+                paramsToSend.putInt("user_type", userType)
+                chooseTags.putExtras(paramsToSend)
+                startActivity(chooseTags)
+            }else if(userType == 2){
+                showHomeView()
+            }
+        }else{
+            println(txtEmail.text.toString())
+            if(!validEmail) Toast.makeText(this, "Please type a valid email", Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, "All items are required", Toast.LENGTH_LONG).show()
+        }
     }
 
     fun selectUserType(view : View){
@@ -74,7 +80,22 @@ class Register : AppCompatActivity() {
     }
 
     private fun showHomeView() {
-        val homeView = Intent(this, CustomerHomeView::class.java)
-        startActivity(homeView)
+        var user = User(
+            0,
+            txtEmail.text.toString(),
+            txtPassword.text.toString(),
+            txtName.text.toString(),
+            userType
+        )
+        val userController = UserController()
+        try{
+            var userId = userController.insert(this, user)
+            user._id = userId.toInt()
+            val homeView = Intent(this, CustomerHomeView::class.java)
+            CurrentApplication.getInstance()!!.setLoggedUser(user)
+            startActivity(homeView)
+        }catch (ex : Exception){
+
+        }
     }
 }

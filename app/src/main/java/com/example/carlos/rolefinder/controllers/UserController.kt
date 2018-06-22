@@ -23,16 +23,15 @@ class UserController() {
         return databaseHelper.selectAllTags()
     }
 
-    fun insert(context : Context, user : User) : Boolean {
+    fun insert(context : Context, user : User) : Long {
         val databaseHelper = DatabaseHelper(context)
         return databaseHelper.insertUser(user)
     }
 
-    fun insertUserTag(context : Context, email : String?, tagId : Int?){
+    fun insertUserTag(context : Context, userId : Int, tagId : Int?){
         var user : User? = null
         val databaseHelper = DatabaseHelper(context)
-        user = databaseHelper.login(email!!)
-        val userTag = UserTag(0, user!!._id, tagId)
+        val userTag = UserTag(0, tagId, userId)
         databaseHelper.insertUserTag(userTag)
     }
 }

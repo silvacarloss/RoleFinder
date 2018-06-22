@@ -45,6 +45,7 @@ class Constants {
             val COLUMN_ADDRESS = "address"
             val COLUMN_DATA = "data"
             val COLUMN_PRICE = "price"
+            val COLUMN_ID_USER_CREATOR = "id_user_creator"
 
             val EVENTS_TABLE_NAME = "events"
             val CREATE_TABLE_EVENTS = "CREATE TABLE events " +
@@ -53,7 +54,8 @@ class Constants {
                     "description TEXT, " +
                     "address TEXT, " +
                     "data TEXT, " +
-                    "price FLOAT);"
+                    "price FLOAT, " +
+                    "id_user_creator INTEGER);"
         }
     }
 

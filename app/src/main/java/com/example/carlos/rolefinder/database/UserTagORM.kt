@@ -22,19 +22,19 @@ class UserTagORM {
 
     lateinit var database : SQLiteDatabase
 
-    fun insert(helper : SQLiteOpenHelper, userTag : UserTag) : Boolean {
+    fun insert(helper : SQLiteOpenHelper, userTag : UserTag) : Long {
         database = helper.writableDatabase
         val valuesToInsert = ContentValues()
-        valuesToInsert.put(Constants.UserTag.COLUMN_USER, userTag.tag_id)
-        valuesToInsert.put(Constants.UserTag.COLUMN_TAG, userTag.user_id)
+        valuesToInsert.put(Constants.UserTag.COLUMN_TAG, userTag.tag_id)
+        valuesToInsert.put(Constants.UserTag.COLUMN_USER, userTag.user_id)
+        var id : Long = -1
         try{
-            database.insert(Constants.UserTag.USER_TAGS_TABLE_NAME, null, valuesToInsert)
+            id = database.insert(Constants.UserTag.USER_TAGS_TABLE_NAME, null, valuesToInsert)
             database.close()
-            return true
         }catch (ex : Exception){
             database.close()
-            return false
         }
+        return id
     }
 
     fun select(helper : SQLiteOpenHelper) : ArrayList<UserTag>? {
@@ -42,8 +42,8 @@ class UserTagORM {
         var listUsers : ArrayList<UserTag>? = null
         var userTag : UserTag? = null
         val cursor = database.query(Constants.UserTag.USER_TAGS_TABLE_NAME,
-                arrayOf(Constants.UserTag.COLUMN_USER,
-                        Constants.UserTag.COLUMN_TAG),
+                arrayOf(Constants.UserTag.COLUMN_TAG,
+                        Constants.UserTag.COLUMN_USER),
                 null,
                 null,
                 null,

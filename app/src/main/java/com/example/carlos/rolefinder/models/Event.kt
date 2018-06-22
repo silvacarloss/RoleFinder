@@ -5,4 +5,5 @@ class Event (var _id : Int?,
              var description : String?,
              var address : String?,
              var date : String?,
-             var price : Float?) {}
+             var price : Float?,
+             var idUserCreator : Int?) {}

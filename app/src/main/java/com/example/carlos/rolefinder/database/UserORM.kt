@@ -22,21 +22,21 @@ class UserORM {
 
     lateinit var database : SQLiteDatabase
 
-    fun insert(helper : SQLiteOpenHelper, user : User) : Boolean {
+    fun insert(helper : SQLiteOpenHelper, user : User) : Long {
         database = helper.writableDatabase
         val valuesToInsert = ContentValues()
         valuesToInsert.put(Constants.Users.COLUMN_EMAIL, user.email)
         valuesToInsert.put(Constants.Users.COLUMN_NAME, user.name)
         valuesToInsert.put(Constants.Users.COLUMN_PASSWORD, user.password)
         valuesToInsert.put(Constants.Users.COLUMN_USER_KIND, user.userKind)
+        var id : Long = -1
         try{
-            database.insert(Constants.Users.USERS_TABLE_NAME, null, valuesToInsert)
+            id = database.insert(Constants.Users.USERS_TABLE_NAME, null, valuesToInsert)
             database.close()
-            return true
         }catch (ex : Exception){
             database.close()
-            return false
         }
+        return id
     }
 
     fun update(helper : SQLiteOpenHelper, user : User){

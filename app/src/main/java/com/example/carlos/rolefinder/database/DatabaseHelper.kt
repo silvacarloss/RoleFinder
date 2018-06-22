@@ -3,13 +3,10 @@ package com.example.carlos.rolefinder.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.carlos.rolefinder.models.Event
-import com.example.carlos.rolefinder.models.Tags
-import com.example.carlos.rolefinder.models.User
-import com.example.carlos.rolefinder.models.UserTag
+import com.example.carlos.rolefinder.models.*
 import com.example.carlos.rolefinder.utils.Constants
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 3) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 4) {
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS ${Constants.Tags.TAGS_TABLE_NAME}")
@@ -34,7 +31,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         }
     }
 
-    fun insertEvent(event : Event) : Boolean {
+    fun insertEvent(event : Event) : Long {
         return EventORM.getInstance()!!.insert(this, event)
     }
 
@@ -50,7 +47,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         EventORM.getInstance()!!.select(this)
     }
 
-    fun insertUser(user : User) : Boolean {
+    fun insertUser(user : User) : Long {
         return UserORM.getInstance()!!.insert(this, user)
     }
 
@@ -74,7 +71,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         return TagORM.getInstance()!!.select(this)
     }
 
-    fun insertUserTag(userTag : UserTag) : Boolean{
+    fun insertUserTag(userTag : UserTag) : Long {
         return UserTagORM.getInstance()!!.insert(this, userTag)
+    }
+
+    fun insertEventTag(eventTag: EventTag) : Long {
+        return EventTagORM.getInstance()!!.insert(this, eventTag)
     }
 }

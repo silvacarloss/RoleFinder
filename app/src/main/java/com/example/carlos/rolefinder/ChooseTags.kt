@@ -65,17 +65,20 @@ class ChooseTags : AppCompatActivity() {
             getIntent().getExtras().getString("event_description"),
             getIntent().getExtras().getString("event_address"),
             getIntent().getExtras().getString("event_date"),
-            getIntent().getExtras().getFloat("event_price")
+            getIntent().getExtras().getFloat("event_price"),
+            CurrentApplication.getInstance()!!.getLoggedUser()!!._id
         )
 
         val eventsController = EventsController()
-        if(eventsController.insert(this, event)){
+        try{
+            var id = eventsController.insert(this, event)
             val showHomeView = Intent(this, CustomerHomeView::class.java)
             Toast.makeText(this, "Event added successfully", Toast.LENGTH_SHORT).show()
             startActivity(showHomeView)
-        }else{
+        }catch (ex : Exception){
             Toast.makeText(this, "Eerror while adding contact", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     private fun saveUser() {
@@ -88,17 +91,29 @@ class ChooseTags : AppCompatActivity() {
         )
 
         val userController = UserController()
-        if(userController.insert(this, user)){
+        try{
+            var userId = userController.insert(this, user)
+            user._id = userId.toInt()
             val showUserHomeView = Intent(this, UserHomeView::class.java)
             insertUserTags(user)
             startActivity(showUserHomeView)
+        }catch (ex : Exception){
+
         }
+
     }
 
     private fun insertUserTags(user : User) {
         for(tag in objectTags){
             val userController = UserController()
-            userController.insertUserTag(this, user.email, tag._id)
+            userController.insertUserTag(this, user._id!!, tag._id)
+        }
+    }
+
+    private fun insertEventTags(event : Event) {
+        for(tag in objectTags){
+            val eventController = EventsController()
+            eventController.insertEventTag(this, event._id!!, tag._id)
         }
     }
 }
