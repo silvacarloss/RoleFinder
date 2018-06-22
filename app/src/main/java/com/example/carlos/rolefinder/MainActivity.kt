@@ -21,6 +21,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (CurrentApplication.instance.getLoggedUser() != null){
+            val user = CurrentApplication.instance.getLoggedUser()
+            when(user!!.userKind){
+                1 -> {
+                    val showUserView = Intent(this, UserHomeView::class.java)
+                    startActivity(showUserView)
+                }
+                2 -> {
+                    val showCustomerHomeView = Intent(this, CustomerHomeView::class.java)
+                    startActivity(showCustomerHomeView)
+                }
+            }
+        }
+
         txtEmail = findViewById<EditText>(R.id.txtEmail)
         txtPassword = findViewById<EditText>(R.id.txtPassword)
 
