@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.carlos.rolefinder.models.Event
 import com.example.carlos.rolefinder.models.Tags
 import com.example.carlos.rolefinder.models.User
+import com.example.carlos.rolefinder.models.UserTag
 import com.example.carlos.rolefinder.utils.Constants
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 2) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 3) {
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS ${Constants.Tags.TAGS_TABLE_NAME}")
@@ -71,5 +72,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
 
     fun selectAllTags() : ArrayList<Tags>? {
         return TagORM.getInstance()!!.select(this)
+    }
+
+    fun insertUserTag(userTag : UserTag) : Boolean{
+        return UserTagORM.getInstance()!!.insert(this, userTag)
     }
 }

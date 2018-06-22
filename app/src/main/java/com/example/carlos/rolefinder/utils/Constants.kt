@@ -75,14 +75,14 @@ class Constants {
     class UserTag{
         companion object {
             val COLUMN_ID = "_id"
-            val COLUMN_USER = "user"
-            val COLUMN_TAG = "tag"
+            val COLUMN_USER = "user_id"
+            val COLUMN_TAG = "tag_id"
 
             val USER_TAGS_TABLE_NAME = "usertags"
             val CREATE_TABLE_USER_TAGS = "CREATE TABLE usertags " +
                     "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "user TEXT," +
-                    "tag TEXT);"
+                    "user_id INTEGER," +
+                    "tag_id INTEGER);"
         }
     }
 

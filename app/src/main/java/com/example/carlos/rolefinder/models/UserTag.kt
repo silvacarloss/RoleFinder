@@ -1,5 +1,5 @@
 package com.example.carlos.rolefinder.models
 
-class UserTag (_id : Int?,
-               tag : Tags?,
-               user : User?) {}
+class UserTag (var _id : Int?,
+               var tag_id : Int?,
+               var user_id : Int?) {}

@@ -47,13 +47,14 @@ class ChooseTags : AppCompatActivity() {
     }
 
     private fun showHomeView() {
-        for(tag in objectTags){
-            println(tag._id)
-        }
-        if(getIntent().getExtras().getBoolean("is_user")){
-            saveUser()
+        if(objectTags != null){
+            if(getIntent().getExtras().getBoolean("is_user")){
+                saveUser()
+            }else{
+                saveEvent()
+            }
         }else{
-            saveEvent()
+            Toast.makeText(this, "Select at least one item", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -89,7 +90,15 @@ class ChooseTags : AppCompatActivity() {
         val userController = UserController()
         if(userController.insert(this, user)){
             val showUserHomeView = Intent(this, UserHomeView::class.java)
+            insertUserTags(user)
             startActivity(showUserHomeView)
+        }
+    }
+
+    private fun insertUserTags(user : User) {
+        for(tag in objectTags){
+            val userController = UserController()
+            userController.insertUserTag(this, user.email, tag._id)
         }
     }
 }
