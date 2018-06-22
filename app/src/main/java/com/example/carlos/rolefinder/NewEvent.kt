@@ -15,6 +15,7 @@ class NewEvent : AppCompatActivity() {
     lateinit var txtAddress : EditText
     lateinit var txtDate : EditText
     lateinit var txtPrice : EditText
+    var isEdit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class NewEvent : AppCompatActivity() {
 
         if(extras != null){
             if(getIntent().getExtras().getBoolean("is_edit")){
+                isEdit = true
                 fillFields(getIntent().getExtras().getInt("event_id"))
             }
         }
@@ -61,6 +63,10 @@ class NewEvent : AppCompatActivity() {
             paramsToSend.putString("event_address", txtAddress.text.toString())
             paramsToSend.putString("event_date", txtDate.text.toString())
             paramsToSend.putFloat("event_price", txtPrice.text.toString().toFloat())
+            if(isEdit){
+                paramsToSend.putBoolean("is_edit", true)
+                paramsToSend.putInt("event_id", getIntent().getExtras().getInt("event_id"))
+            }
             intentShowTags.putExtras(paramsToSend)
             startActivity(intentShowTags)
         }else{
@@ -71,7 +77,6 @@ class NewEvent : AppCompatActivity() {
     fun fillFields(eventId : Int){
         val eventsController = EventsController()
         val event = eventsController.select(this, eventId)!![0]
-        println(eventId)
         txtTitle.setText(event.title)
         txtDescription.setText(event.description)
         txtAddress.setText(event.address)

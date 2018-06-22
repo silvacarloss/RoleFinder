@@ -71,7 +71,14 @@ class ChooseTags : AppCompatActivity() {
 
         val eventsController = EventsController()
         try{
-            var id = eventsController.insert(this, event)
+            if(getIntent().getExtras().getBoolean("is_edit")){
+                event._id = getIntent().getExtras().getInt("event_id")
+                eventsController.update(this, event)
+                eventsController.removeAllEventTags(this, event._id!!)
+            }else{
+                var id = eventsController.insert(this, event)
+            }
+            insertEventTags(event)
             val showHomeView = Intent(this, CustomerHomeView::class.java)
             Toast.makeText(this, "Event added successfully", Toast.LENGTH_SHORT).show()
             startActivity(showHomeView)
@@ -106,14 +113,14 @@ class ChooseTags : AppCompatActivity() {
     private fun insertUserTags(user : User) {
         for(tag in objectTags){
             val userController = UserController()
-            userController.insertUserTag(this, user._id!!, tag._id)
+            userController.insertUserTag(this, tag._id!!, user._id!!)
         }
     }
 
     private fun insertEventTags(event : Event) {
         for(tag in objectTags){
             val eventController = EventsController()
-            eventController.insertEventTag(this, event._id!!, tag._id)
+            eventController.insertEventTag(this, tag._id!!, event._id!!)
         }
     }
 }

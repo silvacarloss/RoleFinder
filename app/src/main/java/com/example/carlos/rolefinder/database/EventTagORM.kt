@@ -64,11 +64,11 @@ class EventTagORM {
         return listTags
     }
 
-    fun delete(helper : SQLiteOpenHelper, eventTag : EventTag){
+    fun delete(helper : SQLiteOpenHelper, eventId : Int){
         database = helper.writableDatabase
         database.delete(Constants.EventTag.EVENTS_TAG_TABLE_NAME,
-                Constants.EventTag.COLUMN_ID,
-                arrayOf(eventTag._id.toString()))
+                "${Constants.EventTag.COLUMN_EVENT}=?",
+                arrayOf(eventId.toString()))
 
         database.close()
     }

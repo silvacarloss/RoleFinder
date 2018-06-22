@@ -86,4 +86,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
     fun selectEvent(userId: Int) : ArrayList<Event>? {
         return EventORM.getInstance()!!.select(this, userId)
     }
+
+    fun removeAllEventTags(eventId: Int) {
+        EventTagORM.getInstance()!!.delete(this, eventId)
+    }
 }

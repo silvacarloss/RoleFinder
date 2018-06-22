@@ -31,6 +31,11 @@ class CustomerHomeView : AppCompatActivity() {
         fillScreenWithEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+        fillScreenWithEvents()
+    }
+
     private fun fillScreenWithEvents() {
         val eventController = EventsController()
         val listEvents = findViewById<ListView>(R.id.listEvents)
