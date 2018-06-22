@@ -37,31 +37,26 @@ class UserTagORM {
         return id
     }
 
-    fun select(helper : SQLiteOpenHelper) : ArrayList<UserTag>? {
+    fun select(helper : SQLiteOpenHelper, userId : Int) : ArrayList<UserTag>? {
         database = helper.readableDatabase
-        var listUsers : ArrayList<UserTag>? = null
+        var listUsersTag : ArrayList<UserTag>? = null
         var userTag : UserTag? = null
-        val cursor = database.query(Constants.UserTag.USER_TAGS_TABLE_NAME,
-                arrayOf(Constants.UserTag.COLUMN_TAG,
-                        Constants.UserTag.COLUMN_USER),
-                null,
-                null,
-                null,
-                null,
-                null)
+        var query = "SELECT * FROM ${Constants.UserTag.USER_TAGS_TABLE_NAME} " +
+                "WHERE ${Constants.UserTag.COLUMN_USER}=?"
+        val cursor = database.rawQuery(query, arrayOf(userId.toString()))
 
         if(cursor.moveToFirst()){
             do {
                 userTag!!._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
                 userTag.user_id = cursor.getString(cursor.getColumnIndex(Constants.UserTag.COLUMN_USER)).toInt()
                 userTag.tag_id = cursor.getString(cursor.getColumnIndex(Constants.UserTag.COLUMN_TAG)).toInt()
-                listUsers!!.add(userTag)
+                listUsersTag!!.add(userTag)
             }while(cursor.moveToNext())
         }
 
         cursor.close()
         database.close()
-        return listUsers
+        return listUsersTag
     }
 
     fun delete(helper : SQLiteOpenHelper, userTag : UserTag){

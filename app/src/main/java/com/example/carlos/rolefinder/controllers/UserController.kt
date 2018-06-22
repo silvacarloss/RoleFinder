@@ -2,6 +2,7 @@ package com.example.carlos.rolefinder.controllers
 
 import android.content.Context
 import android.content.Intent
+import com.example.carlos.rolefinder.CurrentApplication
 import com.example.carlos.rolefinder.UserHomeView
 import com.example.carlos.rolefinder.database.DatabaseHelper
 import com.example.carlos.rolefinder.database.UserORM
@@ -33,5 +34,12 @@ class UserController() {
         val databaseHelper = DatabaseHelper(context)
         val userTag = UserTag(0, tagId, userId)
         databaseHelper.insertUserTag(userTag)
+    }
+
+    fun getSuggestedEvents(context: Context){
+        var user = CurrentApplication.instance.getLoggedUser()
+        val databaseHelper = DatabaseHelper(context)
+        var userTagsList = databaseHelper.selectUserTags(user!!._id)
+        var eventsList = databaseHelper.selectAllEventsByTag(userTagsList)
     }
 }

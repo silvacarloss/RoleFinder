@@ -64,6 +64,28 @@ class EventTagORM {
         return listTags
     }
 
+    fun select(helper : SQLiteOpenHelper, userTagId : Int) : ArrayList<EventTag>? {
+        database = helper.readableDatabase
+        var listTags : ArrayList<EventTag>? = null
+        var eventTag : EventTag? = null
+        var query = "SELECT * FROM ${Constants.EventTag.EVENTS_TAG_TABLE_NAME}" +
+                "WHERE ${Constants.EventTag.COLUMN_TAG}=?"
+        val cursor = database.rawQuery(query, arrayOf(userTagId.toString()))
+
+        if(cursor.moveToFirst()){
+            do {
+                eventTag!!._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
+                eventTag.tag_id = cursor.getString(cursor.getColumnIndex(Constants.EventTag.COLUMN_TAG)).toInt()
+                eventTag.event_id = cursor.getString(cursor.getColumnIndex(Constants.EventTag.COLUMN_EVENT)).toInt()
+                listTags!!.add(eventTag)
+            }while(cursor.moveToNext())
+        }
+
+        cursor.close()
+        database.close()
+        return listTags
+    }
+
     fun delete(helper : SQLiteOpenHelper, eventId : Int){
         database = helper.writableDatabase
         database.delete(Constants.EventTag.EVENTS_TAG_TABLE_NAME,

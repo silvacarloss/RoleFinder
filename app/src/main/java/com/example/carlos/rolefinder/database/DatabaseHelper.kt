@@ -90,4 +90,21 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
     fun removeAllEventTags(eventId: Int) {
         EventTagORM.getInstance()!!.delete(this, eventId)
     }
+
+    fun selectUserTags(_id: Int?): ArrayList<UserTag>? {
+        return UserTagORM.getInstance()!!.select(this, _id!!)
+    }
+
+    fun selectAllEventsByTag(userTagsList: ArrayList<UserTag>?) : ArrayList<Event>? {
+        val events = ArrayList<Event>()
+        var listEventTags = ArrayList<EventTag>()
+        var eventsList = ArrayList<Event>()
+        for (userTag in userTagsList!!){
+            listEventTags = EventTagORM.getInstance()!!.select(this, userTag.tag_id!!)!!
+            for (event in listEventTags){
+                eventsList.add(EventORM.getInstance()!!.selectEvent(this, event.event_id))
+            }
+        }
+        return eventsList
+    }
 }
