@@ -22,4 +22,9 @@ class EventsController {
         val databaseHelper = DatabaseHelper(context)
         return databaseHelper.selectMyEvents(userId!!)
     }
+
+    fun select(context: Context, userId: Int) : ArrayList<Event>? {
+        val databaseHelper = DatabaseHelper(context)
+        return databaseHelper.selectEvent(userId)
+    }
 }

@@ -82,4 +82,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
     fun selectMyEvents(userId: Int) : ArrayList<Event>? {
         return EventORM.getInstance()!!.selectEventByUser(this, userId)
     }
+
+    fun selectEvent(userId: Int) : ArrayList<Event>? {
+        return EventORM.getInstance()!!.select(this, userId)
+    }
 }
