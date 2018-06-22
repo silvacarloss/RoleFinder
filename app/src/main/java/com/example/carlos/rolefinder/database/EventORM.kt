@@ -77,6 +77,7 @@ class EventORM {
         if(cursor.moveToFirst()){
             do {
                 event!!._id = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_ID)).toInt()
+                event.title = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_TITLE))
                 event.description = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DESCRIPTION))
                 event.address = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_ADDRESS))
                 event.date = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DATA))
@@ -98,6 +99,33 @@ class EventORM {
                 arrayOf(event._id.toString()))
 
         database.close()
+    }
+
+    fun selectEventByUser(helper: SQLiteOpenHelper, userId: Int) : ArrayList<Event>? {
+        database = helper.readableDatabase
+        val listEvents = ArrayList<Event>()
+        val query = "SELECT * FROM ${Constants.Events.EVENTS_TABLE_NAME} " +
+                "WHERE ${Constants.Events.COLUMN_ID_USER_CREATOR}=?"
+        val cursor = database.rawQuery(query, arrayOf(userId.toString()))
+
+        if(cursor.moveToFirst()){
+            do {
+                var event = Event(0, "", "", "", "", 0f, 0)
+                event._id = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_ID)).toInt()
+                event.title = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_TITLE))
+                event.description = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DESCRIPTION))
+                event.address = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_ADDRESS))
+                event.date = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DATA))
+                event.price = cursor.getFloat(cursor.getColumnIndex(Constants.Events.COLUMN_PRICE))
+                event.idUserCreator = cursor.getInt(cursor.getColumnIndex(Constants.Events.COLUMN_ID_USER_CREATOR))
+                println("event title: " + event.title)
+                listEvents.add(event)
+            }while(cursor.moveToNext())
+        }
+
+        cursor.close()
+        database.close()
+        return listEvents
     }
 
 }

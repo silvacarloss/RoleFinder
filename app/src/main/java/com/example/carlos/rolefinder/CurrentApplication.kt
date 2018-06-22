@@ -3,17 +3,15 @@ package com.example.carlos.rolefinder
 import com.example.carlos.rolefinder.models.User
 
 class CurrentApplication {
+
     companion object {
+        val instance: CurrentApplication by lazy { Holder.INSTANCE }
+    }
 
-        private var instance : CurrentApplication? = null
+    private object Holder { val INSTANCE = CurrentApplication() }
 
-        @JvmStatic
-        internal fun getInstance() : CurrentApplication? {
-            if (instance == null)
-                return CurrentApplication()
+    init {
 
-            return instance
-        }
     }
 
     private var loggedUser : User? = null

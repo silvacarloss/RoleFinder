@@ -66,7 +66,7 @@ class ChooseTags : AppCompatActivity() {
             getIntent().getExtras().getString("event_address"),
             getIntent().getExtras().getString("event_date"),
             getIntent().getExtras().getFloat("event_price"),
-            CurrentApplication.getInstance()!!.getLoggedUser()!!._id
+            CurrentApplication.instance.getLoggedUser()!!._id
         )
 
         val eventsController = EventsController()

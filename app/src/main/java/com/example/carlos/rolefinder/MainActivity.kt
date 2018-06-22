@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             user = userController.tryLogin(this, txtEmail.text.toString())
             if (user != null){
                 if(txtPassword.text.toString().equals(user.password)){
+                    CurrentApplication.instance.setLoggedUser(user)
                     showNextView(user)
                 }
             }else{

@@ -91,8 +91,8 @@ class Register : AppCompatActivity() {
         try{
             var userId = userController.insert(this, user)
             user._id = userId.toInt()
+            CurrentApplication.instance.setLoggedUser(user)
             val homeView = Intent(this, CustomerHomeView::class.java)
-            CurrentApplication.getInstance()!!.setLoggedUser(user)
             startActivity(homeView)
         }catch (ex : Exception){
 

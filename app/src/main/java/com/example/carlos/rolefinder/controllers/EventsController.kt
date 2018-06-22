@@ -17,4 +17,9 @@ class EventsController {
         val eventTag = EventTag(0, tagId, eventId)
         databaseHelper.insertEventTag(eventTag)
     }
+
+    fun selectMyEvents(context : Context, userId : Int?) : ArrayList<Event>?{
+        val databaseHelper = DatabaseHelper(context)
+        return databaseHelper.selectMyEvents(userId!!)
+    }
 }
