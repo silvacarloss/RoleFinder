@@ -22,7 +22,8 @@
         <activity android:name=".ChooseTags" />
         <activity android:name=".UserHomeView" />
         <activity android:name=".CustomerHomeView" />
-        <activity android:name=".NewEvent"></activity>
+        <activity android:name=".NewEvent" />
+        <activity android:name=".EventDetails"></activity>
     </application>
 
 </manifest>
