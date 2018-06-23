@@ -38,6 +38,11 @@ class UserHomeView : AppCompatActivity() {
                 editUser.putExtras(extraParams)
                 startActivity(editUser)
             }
+            R.id.btnLogout -> {
+                var logoutIntent = Intent(this, MainActivity::class.java)
+                CurrentApplication.instance.setLoggedUser(null)
+                startActivity(logoutIntent)
+            }
         }
         return true
     }

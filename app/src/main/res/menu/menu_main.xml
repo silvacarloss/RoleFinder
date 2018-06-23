@@ -6,5 +6,8 @@
         android:id="@+id/editProfile"
         android:icon="@mipmap/user_icon"
         android:title="My Profile"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/btnLogout"
+        android:title="Logout" />
 </menu>

@@ -16,7 +16,7 @@ class CurrentApplication {
 
     private var loggedUser : User? = null
 
-    fun setLoggedUser(user : User){
+    fun setLoggedUser(user : User?){
         loggedUser = user
     }
 
