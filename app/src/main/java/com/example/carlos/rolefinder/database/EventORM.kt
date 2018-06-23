@@ -118,7 +118,6 @@ class EventORM {
                 event.date = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DATA))
                 event.price = cursor.getFloat(cursor.getColumnIndex(Constants.Events.COLUMN_PRICE))
                 event.idUserCreator = cursor.getInt(cursor.getColumnIndex(Constants.Events.COLUMN_ID_USER_CREATOR))
-                println("event title: " + event.title)
                 listEvents.add(event)
             }while(cursor.moveToNext())
         }

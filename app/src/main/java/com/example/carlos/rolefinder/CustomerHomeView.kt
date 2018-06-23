@@ -65,7 +65,6 @@ class CustomerHomeView : AppCompatActivity() {
         val listMyEvents = eventController.selectMyEvents(this, currentUserId)
         if(listMyEvents != null){
             for(event in listMyEvents){
-                println("aeae")
                 val eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
                 listAdaptedEvents.add(eventAdaptee)
             }

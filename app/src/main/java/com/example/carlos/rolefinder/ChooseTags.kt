@@ -76,6 +76,7 @@ class ChooseTags : AppCompatActivity() {
             if(intent.extras.getBoolean("is_edit")){
                 event._id = getIntent().getExtras().getInt("event_id")
                 eventsController.update(this, event)
+                id = event._id!!.toLong()
                 eventsController.removeAllEventTags(this, event._id!!)
             }else{
                 id = eventsController.insert(this, event)
@@ -132,6 +133,7 @@ class ChooseTags : AppCompatActivity() {
     private fun insertEventTags(event : Event) {
         for(tag in objectTags){
             val eventController = EventsController()
+            println(tag.name)
             eventController.insertEventTag(this, tag._id!!, event._id!!)
         }
     }

@@ -56,7 +56,9 @@ class UserHomeView : AppCompatActivity() {
         if(listMyEvents != null){
             for(event in listMyEvents!!){
                 val eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
-                listAdaptedEvents.add(eventAdaptee)
+                if(!listAdaptedEvents.contains(eventAdaptee)){
+                    listAdaptedEvents.add(eventAdaptee)
+                }
             }
             val adapter  = ArrayAdapter<EventAdaptee>(this, android.R.layout.simple_list_item_1, listAdaptedEvents)
             addListItemListener(listEvents, adapter, listMyEvents!!)
