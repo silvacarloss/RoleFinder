@@ -92,11 +92,11 @@ class EventORM {
         return listEvents
     }
 
-    fun delete(helper : SQLiteOpenHelper, event : Event){
+    fun delete(helper : SQLiteOpenHelper, eventId : Int){
         database = helper.writableDatabase
         database.delete(Constants.Events.EVENTS_TABLE_NAME,
-                Constants.Events.COLUMN_ID,
-                arrayOf(event._id.toString()))
+                Constants.Events.COLUMN_ID + "=?",
+                arrayOf(eventId.toString()))
 
         database.close()
     }

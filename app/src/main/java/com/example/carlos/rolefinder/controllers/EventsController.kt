@@ -37,4 +37,10 @@ class EventsController {
         val databaseHelper = DatabaseHelper(context)
         return databaseHelper.removeAllEventTags(eventId)
     }
+
+    fun delete(context: Context, id: Int) {
+        val databaseHelper = DatabaseHelper(context)
+        databaseHelper.removeAllEventTags(id)
+        databaseHelper.deleteEvent(id)
+    }
 }

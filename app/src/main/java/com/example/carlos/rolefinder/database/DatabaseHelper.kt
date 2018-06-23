@@ -35,8 +35,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         return EventORM.getInstance()!!.insert(this, event)
     }
 
-    fun deleteEvent(event : Event){
-        EventORM.getInstance()!!.delete(this, event)
+    fun deleteEvent(id : Int){
+        EventORM.getInstance()!!.delete(this, id)
     }
 
     fun updateEvent(event : Event){

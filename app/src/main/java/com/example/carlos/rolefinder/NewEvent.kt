@@ -43,8 +43,18 @@ class NewEvent : AppCompatActivity() {
             if(getIntent().getExtras().getBoolean("is_edit")){
                 isEdit = true
                 fillFields(getIntent().getExtras().getInt("event_id"))
+                val btnDeleteEvent = findViewById<Button>(R.id.btnDeleteEvent)
+                btnDeleteEvent.visibility = View.VISIBLE
+                btnDeleteEvent.setOnClickListener(View.OnClickListener { deleteEvent() })
             }
         }
+    }
+
+    private fun deleteEvent() {
+        var eventsController = EventsController()
+        eventsController.delete(this, intent.extras.getInt("event_id"))
+        var homeView = Intent(this, CustomerHomeView::class.java)
+        startActivity(homeView)
     }
 
     private fun showTagOptions() {

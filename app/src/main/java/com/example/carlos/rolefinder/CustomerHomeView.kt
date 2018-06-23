@@ -70,5 +70,6 @@ class CustomerHomeView : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
     }
 }
