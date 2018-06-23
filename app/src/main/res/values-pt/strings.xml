@@ -14,8 +14,8 @@
     <string name="address"> Endereço (Rua, número, cidade) </string>
     <string name="date"> Data (clique para alterar) </string>
     <string name="price"> Preço </string>    
-    <string name="want_add"> Gostaria de adicionar meus eventos aqui </string>    
-    <string name="want_receive"> Gostaria de receber eventos cadastrados </string>    
+    <string name="want_add"> Gostaria de adicionar eventos </string>    
+    <string name="want_receive"> Gostaria ver eventos cadastrados </string>    
     <string name="interests"> Aqui estão alguns eventos que possam te interessar: </string>    
     <string name="my_profile"> Meu perfil </string>    
     <string name="please_fill_all_field"> Por favor, preencha todos os campos </string>    
