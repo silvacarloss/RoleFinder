@@ -101,7 +101,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         for (userTag in userTagsList!!){
             listEventTags = EventTagORM.getInstance()!!.select(this, userTag.tag_id!!)!!
             for (event in listEventTags){
-                eventsList.add(EventORM.getInstance()!!.selectEvent(this, event.event_id))
+                println("tamo ai na atividade com o evento " + event.event_id)
+                val actualEvent = EventORM.getInstance()!!.selectEvent(this, event.event_id)
+                if(actualEvent != null){
+                    eventsList.add(actualEvent[0])
+                }
             }
         }
         return eventsList

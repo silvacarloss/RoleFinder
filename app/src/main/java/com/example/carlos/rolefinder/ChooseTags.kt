@@ -70,14 +70,16 @@ class ChooseTags : AppCompatActivity() {
         )
 
         val eventsController = EventsController()
+        var id : Long = -1
         try{
             if(getIntent().getExtras().getBoolean("is_edit")){
                 event._id = getIntent().getExtras().getInt("event_id")
                 eventsController.update(this, event)
                 eventsController.removeAllEventTags(this, event._id!!)
             }else{
-                var id = eventsController.insert(this, event)
+                id = eventsController.insert(this, event)
             }
+            event._id = id.toInt()
             insertEventTags(event)
             val showHomeView = Intent(this, CustomerHomeView::class.java)
             Toast.makeText(this, "Event added successfully", Toast.LENGTH_SHORT).show()

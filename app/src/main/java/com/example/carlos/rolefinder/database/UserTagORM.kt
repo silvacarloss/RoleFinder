@@ -41,9 +41,9 @@ class UserTagORM {
     fun select(helper : SQLiteOpenHelper, userId : Int) : ArrayList<UserTag>? {
         database = helper.readableDatabase
         val listUsersTag = ArrayList<UserTag>()
-        val query = "SELECT * FROM ${Constants.UserTag.USER_TAGS_TABLE_NAME}"
-//                " WHERE ${Constants.UserTag.COLUMN_USER}=?"
-        val cursor = database.rawQuery(query, arrayOf())
+        val query = "SELECT * FROM ${Constants.UserTag.USER_TAGS_TABLE_NAME}" +
+                " WHERE ${Constants.UserTag.COLUMN_USER}=?"
+        val cursor = database.rawQuery(query, arrayOf(userId.toString()))
 
         if(cursor.moveToFirst()){
             do {
@@ -51,7 +51,6 @@ class UserTagORM {
                 userTag._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
                 userTag.tag_id = cursor.getString(cursor.getColumnIndex(Constants.UserTag.COLUMN_TAG)).toInt()
                 userTag.user_id = cursor.getString(cursor.getColumnIndex(Constants.UserTag.COLUMN_USER)).toInt()
-                println("eventtag = " + userTag.user_id!!)
                 listUsersTag.add(userTag)
             }while(cursor.moveToNext())
         }

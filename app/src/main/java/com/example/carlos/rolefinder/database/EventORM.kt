@@ -154,9 +154,9 @@ class EventORM {
         return listEvents
     }
 
-    fun selectEvent(databaseHelper: DatabaseHelper, event_id: Int?): Event {
+    fun selectEvent(databaseHelper: DatabaseHelper, event_id: Int?): ArrayList<Event>? {
         database = databaseHelper.readableDatabase
-        val listEvents = ArrayList<Event>()
+        val listEvents : ArrayList<Event>? = ArrayList()
         val query = "SELECT * FROM ${Constants.Events.EVENTS_TABLE_NAME} " +
                 "WHERE ${Constants.Events.COLUMN_ID}=?"
         val cursor = database.rawQuery(query, arrayOf(event_id.toString()))
@@ -171,13 +171,13 @@ class EventORM {
                 event.date = cursor.getString(cursor.getColumnIndex(Constants.Events.COLUMN_DATA))
                 event.price = cursor.getFloat(cursor.getColumnIndex(Constants.Events.COLUMN_PRICE))
                 event.idUserCreator = cursor.getInt(cursor.getColumnIndex(Constants.Events.COLUMN_ID_USER_CREATOR))
-                listEvents.add(event)
+                listEvents!!.add(event)
             }while(cursor.moveToNext())
         }
 
         cursor.close()
         database.close()
-        return listEvents[0]
+        return listEvents
     }
 
 }

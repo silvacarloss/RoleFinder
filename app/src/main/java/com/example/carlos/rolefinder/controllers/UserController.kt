@@ -38,10 +38,10 @@ class UserController() {
     }
 
     fun getSuggestedEvents(context: Context) : ArrayList<Event>? {
-        var user = CurrentApplication.instance.getLoggedUser()
+        val user = CurrentApplication.instance.getLoggedUser()
         val databaseHelper = DatabaseHelper(context)
-        var userTagsList = databaseHelper.selectUserTags(user!!._id)
-        var eventsList = databaseHelper.selectAllEventsByTag(userTagsList)
+        val userTagsList = databaseHelper.selectUserTags(user!!._id)
+        val eventsList = databaseHelper.selectAllEventsByTag(userTagsList)
         return eventsList
     }
 }

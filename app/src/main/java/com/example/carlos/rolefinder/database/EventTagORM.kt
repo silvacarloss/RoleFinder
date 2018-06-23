@@ -74,9 +74,9 @@ class EventTagORM {
         if(cursor.moveToFirst()){
             do {
                 val eventTag = EventTag(0,0,0)
-                eventTag._id = cursor.getString(cursor.getColumnIndex(Constants.Users.COLUMN_ID)).toInt()
-                eventTag.tag_id = cursor.getString(cursor.getColumnIndex(Constants.EventTag.COLUMN_TAG)).toInt()
-                eventTag.event_id = cursor.getString(cursor.getColumnIndex(Constants.EventTag.COLUMN_EVENT)).toInt()
+                eventTag._id = cursor.getInt(cursor.getColumnIndex(Constants.EventTag.COLUMN_ID))
+                eventTag.tag_id = cursor.getInt(cursor.getColumnIndex(Constants.EventTag.COLUMN_TAG))
+                eventTag.event_id = cursor.getInt(cursor.getColumnIndex(Constants.EventTag.COLUMN_EVENT))
                 listTags.add(eventTag)
             }while(cursor.moveToNext())
         }
