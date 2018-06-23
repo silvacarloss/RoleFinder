@@ -52,7 +52,7 @@ class CustomerHomeView : AppCompatActivity() {
             addListItemListener(listEvents, adapter, listMyEvents)
             listEvents.adapter = adapter
         }else{
-            txtMessage.text ="Woops! It looks like you haven't created any event"
+            txtMessage.text ="Woops! It looks that you haven't created any event"
         }
     }
 

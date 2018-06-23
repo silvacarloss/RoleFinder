@@ -68,8 +68,8 @@ class Constants {
             val EVENTS_TAG_TABLE_NAME = "eventtags"
             val CREATE_TABLE_EVENTS_TAG = "CREATE TABLE eventtags " +
                     "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "event TEXT," +
-                    "tag TEXT);"
+                    "tag TEXT," +
+                    "event TEXT)"
         }
 
     }
@@ -83,8 +83,9 @@ class Constants {
             val USER_TAGS_TABLE_NAME = "usertags"
             val CREATE_TABLE_USER_TAGS = "CREATE TABLE usertags " +
                     "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "user_id INTEGER," +
-                    "tag_id INTEGER);"
+                    "tag_id INTEGER," +
+                    "user_id INTEGER)"
+
         }
     }
 

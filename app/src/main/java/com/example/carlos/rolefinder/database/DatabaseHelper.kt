@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.carlos.rolefinder.models.*
 import com.example.carlos.rolefinder.utils.Constants
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 5) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.db", null, 8) {
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS ${Constants.Tags.TAGS_TABLE_NAME}")
@@ -96,9 +96,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
     }
 
     fun selectAllEventsByTag(userTagsList: ArrayList<UserTag>?) : ArrayList<Event>? {
-        val events = ArrayList<Event>()
         var listEventTags = ArrayList<EventTag>()
-        var eventsList = ArrayList<Event>()
+        val eventsList = ArrayList<Event>()
         for (userTag in userTagsList!!){
             listEventTags = EventTagORM.getInstance()!!.select(this, userTag.tag_id!!)!!
             for (event in listEventTags){

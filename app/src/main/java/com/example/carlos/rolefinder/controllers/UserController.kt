@@ -6,6 +6,7 @@ import com.example.carlos.rolefinder.CurrentApplication
 import com.example.carlos.rolefinder.UserHomeView
 import com.example.carlos.rolefinder.database.DatabaseHelper
 import com.example.carlos.rolefinder.database.UserORM
+import com.example.carlos.rolefinder.models.Event
 import com.example.carlos.rolefinder.models.Tags
 import com.example.carlos.rolefinder.models.User
 import com.example.carlos.rolefinder.models.UserTag
@@ -29,17 +30,18 @@ class UserController() {
         return databaseHelper.insertUser(user)
     }
 
-    fun insertUserTag(context : Context, userId : Int, tagId : Int?){
+    fun insertUserTag(context : Context, tagId : Int?, userId : Int){
         var user : User? = null
         val databaseHelper = DatabaseHelper(context)
         val userTag = UserTag(0, tagId, userId)
         databaseHelper.insertUserTag(userTag)
     }
 
-    fun getSuggestedEvents(context: Context){
+    fun getSuggestedEvents(context: Context) : ArrayList<Event>? {
         var user = CurrentApplication.instance.getLoggedUser()
         val databaseHelper = DatabaseHelper(context)
         var userTagsList = databaseHelper.selectUserTags(user!!._id)
         var eventsList = databaseHelper.selectAllEventsByTag(userTagsList)
+        return eventsList
     }
 }

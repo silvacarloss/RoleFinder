@@ -12,7 +12,7 @@ class EventsController {
         return databaseHelper.insertEvent(event)
     }
 
-    fun insertEventTag(context : Context, eventId : Int, tagId : Int?){
+    fun insertEventTag(context : Context, tagId : Int?, eventId : Int){
         val databaseHelper = DatabaseHelper(context)
         val eventTag = EventTag(0, tagId, eventId)
         databaseHelper.insertEventTag(eventTag)

@@ -103,6 +103,7 @@ class ChooseTags : AppCompatActivity() {
             user._id = userId.toInt()
             val showUserHomeView = Intent(this, UserHomeView::class.java)
             insertUserTags(user)
+            CurrentApplication.instance.setLoggedUser(user)
             startActivity(showUserHomeView)
         }catch (ex : Exception){
 
