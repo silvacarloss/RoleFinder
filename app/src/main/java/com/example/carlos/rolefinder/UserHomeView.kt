@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import com.example.carlos.rolefinder.adapters.EventAdaptee
 import com.example.carlos.rolefinder.controllers.EventsController
 import com.example.carlos.rolefinder.controllers.UserController
 import com.example.carlos.rolefinder.models.Event
+import java.util.*
 
 class UserHomeView : AppCompatActivity() {
 
@@ -60,10 +58,17 @@ class UserHomeView : AppCompatActivity() {
         listMyEvents = userController.getSuggestedEvents(this)
         if(listMyEvents != null){
             for(event in listMyEvents!!){
-                val eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
-                if(!listAdaptedEvents.contains(eventAdaptee)){
-                    listAdaptedEvents.add(eventAdaptee)
+                if(!isPastEvent(event)){
+                    val eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
+                    if(!listAdaptedEvents.contains(eventAdaptee)){
+                        listAdaptedEvents.add(eventAdaptee)
+                    }
+                }else{
+                    var eventsController = EventsController()
+                    eventsController.delete(this, event._id!!)
+                    onResume()
                 }
+
             }
             val adapter  = ArrayAdapter<EventAdaptee>(this, android.R.layout.simple_list_item_1, listAdaptedEvents)
             addListItemListener(listEvents, adapter, listMyEvents!!)
@@ -71,6 +76,27 @@ class UserHomeView : AppCompatActivity() {
         }else{
             txtMessage.text ="Woops! It looks like you haven't created any event"
         }
+    }
+
+    fun isPastEvent(event : Event) : Boolean {
+        val splittedDate = event.date!!.split("/")
+
+        val calendar = Calendar.getInstance()
+
+        if(splittedDate[2].toInt() < calendar.get(Calendar.YEAR)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return true
+        }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
+                && splittedDate[1].toInt() < (calendar.get(Calendar.MONTH) + 1)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return true
+        }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
+                && splittedDate[1].toInt() >= (calendar.get(Calendar.MONTH) + 1)
+                && splittedDate[0].toInt() < calendar.get(Calendar.DAY_OF_MONTH)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return true
+        }
+        return false
     }
 
     private fun addListItemListener(listView: ListView,

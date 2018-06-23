@@ -134,17 +134,14 @@ class NewEvent : AppCompatActivity() {
 
         if(splittedDate[2].toInt() < calendar.get(Calendar.YEAR)){
             Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
-            println("primeira cond")
             return false
         }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
                 && splittedDate[1].toInt() < (calendar.get(Calendar.MONTH) + 1)){
             Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
-            println("segunda cond")
             return false
         }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
                 && splittedDate[1].toInt() >= (calendar.get(Calendar.MONTH) + 1)
                 && splittedDate[0].toInt() < calendar.get(Calendar.DAY_OF_MONTH)){
-            println("terceira cond")
             Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
             return false
         }
