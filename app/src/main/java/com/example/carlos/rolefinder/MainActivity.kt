@@ -68,10 +68,10 @@ class MainActivity : AppCompatActivity() {
                     showNextView(user)
                 }
             }else{
-                Toast.makeText(this, "Wasn't found registers", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, this.getString(R.string.user_not_found), Toast.LENGTH_SHORT).show()
             }
         }else{
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.please_fill_all_field), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -14,7 +14,7 @@
         android:id="@+id/txtListEvents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Here are some interesting things for you:"
+        android:text="@string/interests"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="7dp"
         android:textSize="18dp"

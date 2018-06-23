@@ -93,13 +93,13 @@ class Register : AppCompatActivity() {
                 showHomeView()
             }else{
                 Toast.makeText(this,
-                        "The inserted e-mail is already registered. Type another.",
+                        this.getString(R.string.email_exists),
                         Toast.LENGTH_LONG).show()
             }
         }else{
             println(txtEmail.text.toString())
-            if(!validEmail) Toast.makeText(this, "Please type a valid email", Toast.LENGTH_LONG).show()
-            else Toast.makeText(this, "All items are required", Toast.LENGTH_LONG).show()
+            if(!validEmail) Toast.makeText(this, this.getString(R.string.invalid_email), Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, this.getString(R.string.items_required), Toast.LENGTH_LONG).show()
         }
     }
 

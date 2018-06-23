@@ -55,7 +55,7 @@ class ChooseTags : AppCompatActivity() {
                 saveEvent()
             }
         }else{
-            Toast.makeText(this, "Select at least one item", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.select_least_one), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -84,10 +84,10 @@ class ChooseTags : AppCompatActivity() {
             event._id = id.toInt()
             insertEventTags(event)
             val showHomeView = Intent(this, CustomerHomeView::class.java)
-            Toast.makeText(this, "Event added successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.event_inserted), Toast.LENGTH_SHORT).show()
             startActivity(showHomeView)
         }catch (ex : Exception){
-            Toast.makeText(this, "Eerror while adding contact", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.event_not_inserted), Toast.LENGTH_SHORT).show()
         }
 
     }

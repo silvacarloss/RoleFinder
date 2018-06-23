@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">RoleFinder</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="name">Nome</string>
+    <string name="register">Registre-se</string>
+    <string name="select_tags">Selecione itens que você se interessa:</string>
+    <string name="next">Próximo</string>
+    <string name="created_events">Os eventos que você criou: </string>
+    <string name="add_events">+  Adicionar evento</string>
+    <string name="go_to_event"> Mostrar no mapas </string>
+    <string name="title"> Título </string>
+    <string name="description"> Descrição </string>
+    <string name="address"> Endereço (Rua, número, cidade) </string>
+    <string name="date"> Data (clique para alterar) </string>
+    <string name="price"> Preço </string>    
+    <string name="want_add"> Gostaria de adicionar meus eventos aqui </string>    
+    <string name="want_receive"> Gostaria de receber eventos cadastrados </string>    
+    <string name="interests"> Aqui estão alguns eventos que possam te interessar: </string>    
+    <string name="my_profile"> Meu perfil </string>    
+    <string name="please_fill_all_field"> Por favor, preencha todos os campos </string>    
+    <string name="impossible_past"> Impossível criar evento em data passada </string>    
+    <string name="email_exists"> O e-mail digitado já existe. Digite outro. </string>    
+    <string name="invalid_email"> Por favor, insira um e-mail válido. </string>    
+    <string name="items_required"> Todos os itens são obrigatórios </string>    
+    <string name="user_not_found"> Não foram encontrados registros </string>    
+    <string name="select_least_one"> Selecione pelo menos um item </string>    
+    <string name="event_inserted"> Evento adicionado com sucesso </string>    
+    <string name="event_not_inserted"> Erro durante a inserção do evento. </string>    
+</resources>

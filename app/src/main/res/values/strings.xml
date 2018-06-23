@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">RoleFinder</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="select_tags">Select things you are interested in:</string>
+    <string name="next">Next</string>
+    <string name="created_events">Here are some events you've created: </string>
+    <string name="add_events">+  Add events</string>
+    <string name="go_to_event"> Show in Error while inserting eventmaps </string>
+    <string name="title"> Title </string>
+    <string name="description"> Description </string>
+    <string name="address"> Address (Street, number, city) </string>
+    <string name="date"> Date (click to change) </string>
+    <string name="price"> Price </string>    
+    <string name="want_add"> I want to add my events here </string>    
+    <string name="want_receive"> I want to receive new events </string>    
+    <string name="interests"> Here are some events that you like: </string>    
+    <string name="my_profile"> My profile </string>    
+    <string name="please_fill_all_field"> Please, fill all fields: </string>    
+    <string name="impossible_past"> Impossible to create a past event </string>    
+    <string name="email_exists"> The inserted e-mail is already registered. Type another. </string>    
+    <string name="invalid_email"> Please type a valid email. </string>    
+    <string name="items_required"> All items are required. </string>    
+    <string name="user_not_found"> Wasn't found registers </string>    
+    <string name="select_least_one"> Select at least one item </string>    
+    <string name="event_inserted"> Event added successfully </string>    
+    <string name="event_not_inserted"> Error while inserting event. </string>    
 </resources>

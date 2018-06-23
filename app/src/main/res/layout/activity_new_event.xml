@@ -20,7 +20,7 @@
             android:id="@+id/lblTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title"
             android:textSize="18dp" />
 
         <EditText
@@ -34,7 +34,7 @@
             android:id="@+id/lblDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="@string/description"
             android:textSize="18dp"
             android:layout_marginTop="10dp"/>
 
@@ -49,7 +49,7 @@
             android:id="@+id/lblAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address (Street, number, city)"
+            android:text="@string/address"
             android:textSize="18dp"
             android:layout_marginTop="10dp"/>
 
@@ -64,7 +64,7 @@
             android:id="@+id/lblDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date (click to change)"
+            android:text="@string/date"
             android:textSize="18dp"
             android:layout_marginTop="10dp"/>
 
@@ -80,7 +80,7 @@
             android:id="@+id/lblPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price"
+            android:text="@string/price"
             android:textSize="18dp"
             android:layout_marginTop="10dp"/>
 

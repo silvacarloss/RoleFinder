@@ -123,7 +123,7 @@ class NewEvent : AppCompatActivity() {
             intentShowTags.putExtras(paramsToSend)
             startActivity(intentShowTags)
         }else{
-            Toast.makeText(this, "Please, fill all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.please_fill_all_field), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -133,16 +133,16 @@ class NewEvent : AppCompatActivity() {
         val calendar = Calendar.getInstance()
 
         if(splittedDate[2].toInt() < calendar.get(Calendar.YEAR)){
-            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, this.getString(R.string.impossible_past), Toast.LENGTH_LONG).show()
             return false
         }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
                 && splittedDate[1].toInt() < (calendar.get(Calendar.MONTH) + 1)){
-            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, this.getString(R.string.impossible_past), Toast.LENGTH_LONG).show()
             return false
         }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
                 && splittedDate[1].toInt() >= (calendar.get(Calendar.MONTH) + 1)
                 && splittedDate[0].toInt() < calendar.get(Calendar.DAY_OF_MONTH)){
-            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, this.getString(R.string.impossible_past), Toast.LENGTH_LONG).show()
             return false
         }
         return true

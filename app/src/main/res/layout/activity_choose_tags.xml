@@ -15,6 +15,6 @@
         android:id="@+id/txtSelectItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select items that interests to you"
+        android:text="@string/select_tags"
         android:textSize="18dp"/>
 </LinearLayout>
