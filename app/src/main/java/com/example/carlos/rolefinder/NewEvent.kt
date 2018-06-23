@@ -1,43 +1,76 @@
 package com.example.carlos.rolefinder
 
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import com.example.carlos.rolefinder.controllers.EventsController
+import java.util.*
 
 class NewEvent : AppCompatActivity() {
     lateinit var txtTitle : EditText
     lateinit var txtDescription : EditText
     lateinit var txtAddress : EditText
-    lateinit var txtDate : EditText
+    lateinit var txtDate : TextView
     lateinit var txtPrice : EditText
+    lateinit var lblDate : TextView
     lateinit var btnBack : Button
+    val DIALOG_ID = 1
+    var day : Int = 0
+    var year : Int = 0
+    var month : Int = 0
     var isEdit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_event)
 
-        txtTitle = findViewById(R.id.txtTitle)
+        val calendar = Calendar.getInstance()
+
+        day = calendar.get(Calendar.DAY_OF_MONTH)
+        month = calendar.get(Calendar.MONTH)
+        year = calendar.get(Calendar.YEAR)
+
+        txtTitle = this.findViewById<EditText>(R.id.txtTitle)
         txtDescription = findViewById(R.id.txtDescription)
         txtAddress = findViewById(R.id.txtAddress)
         txtDate = findViewById(R.id.txtDate)
         txtPrice = findViewById(R.id.txtPrice)
+        lblDate = findViewById(R.id.lblDate)
 
         val btnNext = findViewById<Button>(R.id.btnNext)
         btnNext.setOnClickListener(View.OnClickListener {
             showTagOptions()
         })
 
+        txtDate.setOnClickListener(View.OnClickListener { showDialog(DIALOG_ID) })
+        lblDate.setOnClickListener(View.OnClickListener { showDialog(DIALOG_ID) })
+
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener(View.OnClickListener { showCustomerHomeView() })
 
         verifyIsEdit()
     }
+
+    override fun onCreateDialog(id: Int): Dialog? {
+        if(id == DIALOG_ID){
+            return DatePickerDialog(this, dpListener, year, month, day)
+        }
+        return null
+    }
+
+    private var dpListener = DatePickerDialog.OnDateSetListener(function = { datePicker: DatePicker,
+                                                                             year: Int,
+                                                                             month: Int,
+                                                                             day: Int ->
+        this.year = year
+        this.month = month
+        this.day = day
+        txtDate.text = "${day}/${month+1}/${year}"
+    })
 
     private fun showCustomerHomeView() {
         val homeView = Intent(this, MainActivity::class.java)
@@ -71,7 +104,8 @@ class NewEvent : AppCompatActivity() {
                 !txtDescription.text.isNullOrBlank() &&
                 !txtAddress.text.isNullOrBlank() &&
                 !txtDate.text.isNullOrBlank() &&
-                !txtPrice.text.isNullOrBlank()
+                !txtPrice.text.isNullOrBlank() &&
+                isValidDate(txtDate.text.toString())
 
         if(canSubmit){
             val paramsToSend = Bundle()
@@ -91,6 +125,27 @@ class NewEvent : AppCompatActivity() {
         }else{
             Toast.makeText(this, "Please, fill all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isValidDate(date : String): Boolean {
+        val splittedDate = date.split("/")
+
+        val calendar = Calendar.getInstance()
+
+        if(splittedDate[2].toInt() < calendar.get(Calendar.YEAR)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return false
+        }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
+                && splittedDate[1].toInt() < (calendar.get(Calendar.MONTH) + 1)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return false
+        }else if(splittedDate[2].toInt() >= calendar.get(Calendar.YEAR)
+                && splittedDate[1].toInt() >= (calendar.get(Calendar.MONTH) + 1)
+                && splittedDate[0].toInt() < calendar.get(Calendar.DAY_OF_MONTH)){
+            Toast.makeText(this, "Impossible to create a past event", Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
     }
 
     fun fillFields(eventId : Int){
