@@ -44,4 +44,14 @@ class UserController() {
         val eventsList = databaseHelper.selectAllEventsByTag(userTagsList)
         return eventsList
     }
+
+    fun update(context : Context, user: User) {
+        val databaseHelper = DatabaseHelper(context)
+        return databaseHelper.updateUser(user)
+    }
+
+    fun removeAllUserTags(context : Context, userId: Int) {
+        val databaseHelper = DatabaseHelper(context)
+        return databaseHelper.removeAllUserTags(userId)
+    }
 }

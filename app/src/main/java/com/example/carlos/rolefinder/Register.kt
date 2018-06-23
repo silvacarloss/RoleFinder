@@ -17,6 +17,7 @@ class Register : AppCompatActivity() {
     lateinit var txtName : EditText
     lateinit var txtPassword : EditText
     lateinit var radioGroup : RadioGroup
+    var isEdit : Boolean = false
     var userType = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,25 @@ class Register : AppCompatActivity() {
         radioGroup = findViewById(R.id.groupRadio)
 
         addListener()
+        verifyIsEdit()
+    }
+
+    private fun verifyIsEdit() {
+        val intent = intent
+        val extras = intent.extras
+
+        if(extras != null){
+            isEdit = intent.extras.getBoolean("is_edit")
+            fillFields()
+        }
+    }
+
+    private fun fillFields() {
+        txtName.setText(CurrentApplication.instance.getLoggedUser()!!.name.toString())
+        txtPassword.setText(CurrentApplication.instance.getLoggedUser()!!.password.toString())
+        txtEmail.setText(CurrentApplication.instance.getLoggedUser()!!.email.toString())
+        if(CurrentApplication.instance.getLoggedUser()!!.userKind == 1) radioGroup.check(R.id.radioReceive)
+        else radioGroup.check(R.id.radioAddEvents)
     }
 
     private fun addListener() {
@@ -47,7 +67,13 @@ class Register : AppCompatActivity() {
         val validEmail = Constants.ApplicationUtils.validateEmail(txtEmail.text.toString())
 
         if(canSubmit && validEmail){
-            if(userType == 1){
+            val userController = UserController()
+            var listExistentEmail : User? = null
+            if(!txtEmail.text.toString().equals(CurrentApplication.instance.getLoggedUser()!!.email)){
+                listExistentEmail = userController.tryLogin(this, txtEmail.text.toString())
+            }
+
+            if(userType == 1 && listExistentEmail == null){
                 val chooseTags = Intent(this, ChooseTags::class.java)
                 val paramsToSend = Bundle()
                 paramsToSend.putBoolean("is_user", true)
@@ -57,8 +83,12 @@ class Register : AppCompatActivity() {
                 paramsToSend.putInt("user_type", userType)
                 chooseTags.putExtras(paramsToSend)
                 startActivity(chooseTags)
-            }else if(userType == 2){
+            }else if(userType == 2 && listExistentEmail == null){
                 showHomeView()
+            }else{
+                Toast.makeText(this,
+                        "The inserted e-mail is already registered. Type another.",
+                        Toast.LENGTH_LONG).show()
             }
         }else{
             println(txtEmail.text.toString())
@@ -83,14 +113,21 @@ class Register : AppCompatActivity() {
         var user = User(
             0,
             txtEmail.text.toString(),
-            txtPassword.text.toString(),
             txtName.text.toString(),
+            txtPassword.text.toString(),
             userType
         )
         val userController = UserController()
         try{
-            var userId = userController.insert(this, user)
-            user._id = userId.toInt()
+            isEdit = intent.extras.getBoolean("is_edit")
+            println("is edit: " + isEdit)
+            if(isEdit){
+                user._id = CurrentApplication.instance.getLoggedUser()!!._id
+                userController.update(this, user)
+            }else{
+                val userId = userController.insert(this, user)
+                user._id = userId.toInt()
+            }
             CurrentApplication.instance.setLoggedUser(user)
             val homeView = Intent(this, CustomerHomeView::class.java)
             startActivity(homeView)

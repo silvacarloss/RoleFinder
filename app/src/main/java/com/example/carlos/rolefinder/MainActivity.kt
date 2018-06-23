@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         var isSubmitable : Boolean
         var user : User? = null
         val userController = UserController()
-        txtError = findViewById<Button>(R.id.txtError)
         isSubmitable = !txtEmail.text.isNullOrBlank() && !txtPassword.text.isNullOrBlank()
 
         if(isSubmitable){

@@ -11,6 +11,8 @@ import com.example.carlos.rolefinder.adapters.EventAdaptee
 import com.example.carlos.rolefinder.controllers.EventsController
 import android.widget.ArrayAdapter
 import android.app.Activity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import com.example.carlos.rolefinder.models.Event
@@ -36,16 +38,35 @@ class CustomerHomeView : AppCompatActivity() {
         fillScreenWithEvents()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            R.id.editProfile -> {
+                var editUser = Intent(this, Register::class.java)
+                val extraParams = Bundle()
+                extraParams.putBoolean("is_edit", true)
+                editUser.putExtras(extraParams)
+                startActivity(editUser)
+            }
+        }
+        return true
+    }
+
     private fun fillScreenWithEvents() {
         val eventController = EventsController()
         val listEvents = findViewById<ListView>(R.id.listEvents)
-        var currentUserId = CurrentApplication.instance.getLoggedUser()!!._id
-        var txtMessage = findViewById<TextView>(R.id.txtMessage)
-        var listAdaptedEvents = ArrayList<EventAdaptee>()
+        val currentUserId = CurrentApplication.instance.getLoggedUser()!!._id
+        val txtMessage = findViewById<TextView>(R.id.txtMessage)
+        val listAdaptedEvents = ArrayList<EventAdaptee>()
         val listMyEvents = eventController.selectMyEvents(this, currentUserId)
         if(listMyEvents != null){
             for(event in listMyEvents){
-                var eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
+                println("aeae")
+                val eventAdaptee = EventAdaptee(event._id!!, event.title!!, event.description!!)
                 listAdaptedEvents.add(eventAdaptee)
             }
             val adapter  = ArrayAdapter<EventAdaptee>(this, android.R.layout.simple_list_item_1, listAdaptedEvents)

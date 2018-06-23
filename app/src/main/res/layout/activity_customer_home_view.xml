@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CustomerHomeView">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:id="@+id/btnNewEvent"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+ ADD EVENT" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".CustomerHomeView"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp">
 
-    <TextView
-        android:id="@+id/txtMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Here are some events you've created:" />
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Here are some events you've created:"
+            android:textSize="18dp"
+            android:layout_marginBottom="10dp"/>
 
-    <ListView
-        android:id="@+id/listEvents"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        <ListView
+            android:id="@+id/listEvents"
+            android:layout_width="match_parent"
+            android:layout_height="319dp" />
+
+        <Button
+            android:id="@+id/btnNewEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ ADD EVENT"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</ScrollView>

@@ -6,11 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChooseTags">
+    tools:context=".ChooseTags"
+    android:layout_marginTop="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginLeft="40dp">
 
     <TextView
         android:id="@+id/txtSelectItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select items that interests to you" />
+        android:text="Select items that interests to you"
+        android:textSize="18dp"/>
 </LinearLayout>

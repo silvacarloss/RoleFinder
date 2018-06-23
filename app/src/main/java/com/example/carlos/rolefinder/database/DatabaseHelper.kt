@@ -110,4 +110,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         }
         return eventsList
     }
+
+    fun removeAllUserTags(userId: Int) {
+        UserTagORM.getInstance()!!.delete(this, userId)
+    }
 }

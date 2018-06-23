@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UserHomeView">
+    tools:context=".UserHomeView"
+    android:layout_marginTop="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginLeft="40dp">
 
     <TextView
         android:id="@+id/txtListEvents"
@@ -13,10 +16,12 @@
         android:layout_height="wrap_content"
         android:text="Here are some interesting things for you:"
         tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="7dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:id="@+id/userListEvents"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="415dp" />
 </LinearLayout>

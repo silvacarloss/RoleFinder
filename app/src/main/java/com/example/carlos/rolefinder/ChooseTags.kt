@@ -11,6 +11,7 @@ import com.example.carlos.rolefinder.models.Event
 import com.example.carlos.rolefinder.models.User
 import android.widget.CompoundButton
 import com.example.carlos.rolefinder.models.Tags
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class ChooseTags : AppCompatActivity() {
@@ -72,7 +73,7 @@ class ChooseTags : AppCompatActivity() {
         val eventsController = EventsController()
         var id : Long = -1
         try{
-            if(getIntent().getExtras().getBoolean("is_edit")){
+            if(intent.extras.getBoolean("is_edit")){
                 event._id = getIntent().getExtras().getInt("event_id")
                 eventsController.update(this, event)
                 eventsController.removeAllEventTags(this, event._id!!)
@@ -101,10 +102,18 @@ class ChooseTags : AppCompatActivity() {
 
         val userController = UserController()
         try{
-            var userId = userController.insert(this, user)
-            user._id = userId.toInt()
+            if(getIntent().getExtras().getBoolean("is_edit")){
+                user._id = CurrentApplication.instance.getLoggedUser()!!._id
+                userController.update(this, user)
+                if(user.userKind == 1){
+                    userController.removeAllUserTags(this, user._id!!)
+                }
+            }else{
+                val userId = userController.insert(this, user)
+                user._id = userId.toInt()
+                insertUserTags(user)
+            }
             val showUserHomeView = Intent(this, UserHomeView::class.java)
-            insertUserTags(user)
             CurrentApplication.instance.setLoggedUser(user)
             startActivity(showUserHomeView)
         }catch (ex : Exception){

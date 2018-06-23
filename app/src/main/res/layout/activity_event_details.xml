@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginTop="40dp"
+    android:gravity="right"
     android:orientation="vertical"
     tools:context=".EventDetails">
 
@@ -16,44 +20,52 @@
 
     <TextView
         android:id="@+id/lblTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="TextView"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/lblDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/lblDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/lblPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/btnGetRouteToGo"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:layout_weight="1"
-        android:text="Go to event" />
+        android:background="@color/colorAccent"
+        android:text="Go to event"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="Back" />
 </LinearLayout>

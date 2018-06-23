@@ -60,11 +60,11 @@ class UserTagORM {
         return listUsersTag
     }
 
-    fun delete(helper : SQLiteOpenHelper, userTag : UserTag){
+    fun delete(helper : SQLiteOpenHelper, userId : Int){
         database = helper.writableDatabase
         database.delete(Constants.UserTag.USER_TAGS_TABLE_NAME,
-                Constants.UserTag.COLUMN_ID,
-                arrayOf(userTag._id.toString()))
+                Constants.UserTag.COLUMN_USER+"=?",
+                arrayOf(userId.toString()))
 
         database.close()
     }
