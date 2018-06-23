@@ -47,8 +47,14 @@ class Register : AppCompatActivity() {
         txtName.setText(CurrentApplication.instance.getLoggedUser()!!.name.toString())
         txtPassword.setText(CurrentApplication.instance.getLoggedUser()!!.password.toString())
         txtEmail.setText(CurrentApplication.instance.getLoggedUser()!!.email.toString())
-        if(CurrentApplication.instance.getLoggedUser()!!.userKind == 1) radioGroup.check(R.id.radioReceive)
-        else radioGroup.check(R.id.radioAddEvents)
+        if(CurrentApplication.instance.getLoggedUser()!!.userKind == 1) {
+            radioGroup.check(R.id.radioReceive)
+            userType = 1
+        }
+        else {
+            radioGroup.check(R.id.radioAddEvents)
+            userType = 2
+        }
     }
 
     private fun addListener() {

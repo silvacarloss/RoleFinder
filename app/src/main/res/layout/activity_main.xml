@@ -29,7 +29,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:textColor="@color/white"
-        android:background="@drawable/edit_text_background"/>
+        android:theme="@style/editTextWhiteBottom"/>
 
     <TextView
         android:id="@+id/lblPassword"
@@ -52,7 +52,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:textColor="@color/white"
-        android:background="@drawable/edit_text_background"/>
+        android:theme="@style/editTextWhiteBottom"/>
 
     <Button
         android:id="@+id/btnLogin"
@@ -73,5 +73,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"/>
+        android:background="@drawable/button_no_background"
+        android:textColor="@color/white"/>
 </LinearLayout>
