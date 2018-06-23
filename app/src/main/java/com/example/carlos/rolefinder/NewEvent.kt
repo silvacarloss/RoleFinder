@@ -15,6 +15,7 @@ class NewEvent : AppCompatActivity() {
     lateinit var txtAddress : EditText
     lateinit var txtDate : EditText
     lateinit var txtPrice : EditText
+    lateinit var btnBack : Button
     var isEdit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,15 @@ class NewEvent : AppCompatActivity() {
             showTagOptions()
         })
 
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener(View.OnClickListener { showCustomerHomeView() })
+
         verifyIsEdit()
+    }
+
+    private fun showCustomerHomeView() {
+        val homeView = Intent(this, MainActivity::class.java)
+        startActivity(homeView)
     }
 
     private fun verifyIsEdit() {

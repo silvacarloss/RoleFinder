@@ -74,15 +74,21 @@
 
     <Button
         android:id="@+id/btnNext"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next" />
 
     <Button
         android:id="@+id/btnDeleteEvent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DELETE"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK" />
 
 </LinearLayout>
