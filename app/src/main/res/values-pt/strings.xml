@@ -26,5 +26,6 @@
     <string name="user_not_found"> Não foram encontrados registros </string>    
     <string name="select_least_one"> Selecione pelo menos um item </string>    
     <string name="event_inserted"> Evento adicionado com sucesso </string>    
-    <string name="event_not_inserted"> Erro durante a inserção do evento. </string>    
+    <string name="event_not_inserted"> Erro durante a inserção do evento. </string>
+    <string name="show_maps">Mostrar no maps</string>
 </resources>

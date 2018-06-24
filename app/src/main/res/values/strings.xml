@@ -23,8 +23,9 @@
     <string name="email_exists"> The inserted e-mail is already registered. Type another. </string>    
     <string name="invalid_email"> Please type a valid email. </string>    
     <string name="items_required"> All items are required. </string>    
-    <string name="user_not_found"> Wasn't found registers </string>    
+    <string name="user_not_found"> Wasn\'t found registers </string>
     <string name="select_least_one"> Select at least one item </string>    
     <string name="event_inserted"> Event added successfully </string>    
-    <string name="event_not_inserted"> Error while inserting event. </string>    
+    <string name="event_not_inserted"> Error while inserting event. </string>
+    <string name="show_maps">Show maps</string>
 </resources>

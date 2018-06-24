@@ -75,7 +75,7 @@ class Register : AppCompatActivity() {
         if(canSubmit && validEmail){
             val userController = UserController()
             var listExistentEmail : User? = null
-            if(!txtEmail.text.toString().equals(CurrentApplication.instance.getLoggedUser()!!.email)){
+            if(!intent.hasExtra("is_edit")){
                 listExistentEmail = userController.tryLogin(this, txtEmail.text.toString())
             }
 
@@ -116,7 +116,7 @@ class Register : AppCompatActivity() {
     }
 
     private fun showHomeView() {
-        var user = User(
+        val user = User(
             0,
             txtEmail.text.toString(),
             txtName.text.toString(),
@@ -125,10 +125,13 @@ class Register : AppCompatActivity() {
         )
         val userController = UserController()
         try{
-            isEdit = intent.extras.getBoolean("is_edit")
-            println("is edit: " + isEdit)
+            if(intent.hasExtra("is_edit")){
+                isEdit = intent.extras.getBoolean("is_edit")
+            }
+
             if(isEdit){
                 user._id = CurrentApplication.instance.getLoggedUser()!!._id
+                println("esse inferno ta editando" + user._id)
                 userController.update(this, user)
             }else{
                 val userId = userController.insert(this, user)
