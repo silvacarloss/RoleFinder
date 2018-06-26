@@ -34,7 +34,6 @@ class UserTagORM {
         }catch (ex : Exception){
             database.close()
         }
-        println(id)
         return id
     }
 

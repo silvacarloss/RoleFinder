@@ -86,6 +86,7 @@ class Register : AppCompatActivity() {
                 paramsToSend.putString("user_email", txtEmail.text.toString())
                 paramsToSend.putString("user_password", txtPassword.text.toString())
                 paramsToSend.putString("user_name", txtName.text.toString())
+                paramsToSend.putBoolean("is_edit", true)
                 paramsToSend.putInt("user_type", userType)
                 chooseTags.putExtras(paramsToSend)
                 startActivity(chooseTags)
@@ -97,7 +98,6 @@ class Register : AppCompatActivity() {
                         Toast.LENGTH_LONG).show()
             }
         }else{
-            println(txtEmail.text.toString())
             if(!validEmail) Toast.makeText(this, this.getString(R.string.invalid_email), Toast.LENGTH_LONG).show()
             else Toast.makeText(this, this.getString(R.string.items_required), Toast.LENGTH_LONG).show()
         }
@@ -131,7 +131,6 @@ class Register : AppCompatActivity() {
 
             if(isEdit){
                 user._id = CurrentApplication.instance.getLoggedUser()!!._id
-                println("esse inferno ta editando" + user._id)
                 userController.update(this, user)
             }else{
                 val userId = userController.insert(this, user)

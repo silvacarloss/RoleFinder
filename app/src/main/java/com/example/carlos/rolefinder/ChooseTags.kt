@@ -112,8 +112,8 @@ class ChooseTags : AppCompatActivity() {
             }else{
                 val userId = userController.insert(this, user)
                 user._id = userId.toInt()
-                insertUserTags(user)
             }
+            insertUserTags(user)
             val showUserHomeView = Intent(this, UserHomeView::class.java)
             CurrentApplication.instance.setLoggedUser(user)
             startActivity(showUserHomeView)
@@ -133,7 +133,6 @@ class ChooseTags : AppCompatActivity() {
     private fun insertEventTags(event : Event) {
         for(tag in objectTags){
             val eventController = EventsController()
-            println(tag.name)
             eventController.insertEventTag(this, tag._id!!, event._id!!)
         }
     }

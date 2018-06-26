@@ -92,27 +92,4 @@ class MainActivity : AppCompatActivity() {
         val registerUser = Intent(this, Register::class.java)
         startActivity(registerUser)
     }
-
-//    fun sendRequest(requestType : String){
-//        when(requestType){
-//            "tags" -> callApi("tags")
-//        }
-//    }
-//
-//    private fun callApi(s: String) {
-//        val textView = findViewById<TextView>(R.id.txtShowRequest)
-//        val queue = Volley.newRequestQueue(this)
-//        val url = "http://192.168.1.39:8000/api/event"
-//
-//        val stringRequest = StringRequest(Request.Method.GET, url,
-//                Response.Listener<String> { response ->
-//                    val myObjects = JSONObject(response)
-//                    val jsonArray = myObjects.getJSONArray("objects")
-//
-//                    textView.text = "Response is: ${response.substring(0, 300)}"
-//                },
-//                Response.ErrorListener { textView.text = "That didn't work!" })
-//
-//        queue.add(stringRequest)
-//    }
 }

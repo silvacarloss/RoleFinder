@@ -26,7 +26,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "rolefinder.d
         for (tag in Constants.Tags.listTags){
             val query = "INSERT INTO ${Constants.Tags.TAGS_TABLE_NAME} " +
                     "(${Constants.Tags.COLUMN_NAME}) VALUES ('${tag}');"
-            println(query)
             db.execSQL(query)
         }
     }
